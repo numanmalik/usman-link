@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+background:linear-gradient(135deg,#ff4e8d,#ff9a9e);
+font-family:Arial,sans-serif;
+overflow:hidden;
+}
+
+/* hearts */
+.heart{
+position:fixed;
+top:-10px;
+font-size:22px;
+animation:fall linear infinite;
+}
+@keyframes fall{
+to{transform:translateY(110vh);opacity:0;}
+}
+
+.container{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+z-index:2;
+position:relative;
+}
+
+h1{font-size:2.1rem;}
+
+.buttons{
+margin-top:30px;
+height:150px;
+position:relative;
+}
+
+button{
+padding:14px 32px;
+font-size:18px;
+border:none;
+border-radius:30px;
+color:white;
+font-weight:bold;
+}
+
+#yes{
+background:linear-gradient(45deg,#00c853,#64dd17);
+}
+
+#no{
+background:linear-gradient(45deg,#ff1744,#ff616f);
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+}
+
+/* modal */
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:5;
+}
+
+.box{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+color:#e6005c;
+animation:pop .8s ease;
+}
+
+.box img{
+width:170px;
+animation:float 2s infinite ease-in-out;
+}
+
+@keyframes pop{
+from{transform:scale(0);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+100%{transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1 id="title"></h1>
+
+<div class="buttons">
+<button id="yes">YES</button>
+<button id="no">NO</button>
+</div>
+</div>
+
+<div class="modal" id="modal">
+<div class="box">
+<h2 id="final"></h2>
+<img src="https://i.imgur.com/1X6Rz0H.png">
+<p>Forever Together ❤️</p>
+</div>
+</div>
+
+<script>
+const p=new URLSearchParams(location.search);
+const from=p.get("from")||"Someone";
+const to=p.get("to")||"You";
+
+document.getElementById("title").innerText=
+`Hey ${to}, will you be my Valentine? ❤️`;
+
+document.getElementById("final").innerText=
+`${from} & ${to} are now Valentines 💖`;
+
+// no button
+const no=document.getElementById("no");
+function move(){
+no.style.left=Math.random()*(innerWidth-120)+"px";
+no.style.top=Math.random()*(innerHeight-120)+"px";
+}
+no.ontouchstart=e=>{e.preventDefault();move();}
+no.onclick=move;
+
+// yes
+document.getElementById("yes").onclick=()=>{
+document.getElementById("modal").style.display="flex";
+};
+
+// hearts
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=3+Math.random()*3+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},300);
+</script>
+
+</body>
+</html>
