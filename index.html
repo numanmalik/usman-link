@@ -14,14 +14,15 @@ font-family:Arial,sans-serif;
 overflow:hidden;
 }
 
-/* hearts */
-.heart{
+/* floating items */
+.fall{
 position:fixed;
 top:-10px;
-font-size:22px;
-animation:fall linear infinite;
+animation:drop linear infinite;
+pointer-events:none;
 }
-@keyframes fall{
+
+@keyframes drop{
 to{transform:translateY(110vh);opacity:0;}
 }
 
@@ -33,11 +34,14 @@ justify-content:center;
 align-items:center;
 text-align:center;
 color:white;
-z-index:2;
 position:relative;
+z-index:2;
+padding:20px;
 }
 
-h1{font-size:2.1rem;}
+h1{
+font-size:2rem;
+}
 
 .buttons{
 margin-top:30px;
@@ -52,6 +56,7 @@ border:none;
 border-radius:30px;
 color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
 #yes{
@@ -82,11 +87,11 @@ padding:25px;
 border-radius:20px;
 text-align:center;
 color:#e6005c;
-animation:pop .8s ease;
+animation:pop .6s ease;
 }
 
 .box img{
-width:170px;
+width:160px;
 animation:float 2s infinite ease-in-out;
 }
 
@@ -97,7 +102,7 @@ to{transform:scale(1);opacity:1;}
 
 @keyframes float{
 0%{transform:translateY(0);}
-50%{transform:translateY(-12px);}
+50%{transform:translateY(-10px);}
 100%{transform:translateY(0);}
 }
 </style>
@@ -109,31 +114,53 @@ to{transform:scale(1);opacity:1;}
 <h1 id="title"></h1>
 
 <div class="buttons">
-<button id="yes">YES</button>
-<button id="no">NO</button>
+<button id="yes">YES 💚</button>
+<button id="no">NO 💔</button>
 </div>
 </div>
 
 <div class="modal" id="modal">
 <div class="box">
 <h2 id="final"></h2>
-<img src="https://i.imgur.com/1X6Rz0H.png">
+<p style="font-size:40px;">💍💖🌸</p>
 <p>Forever Together ❤️</p>
 </div>
 </div>
 
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+
+/* URL parameters */
 const p=new URLSearchParams(location.search);
 const from=p.get("from")||"Someone";
 const to=p.get("to")||"You";
+const fg=p.get("fromGender");
+const tg=p.get("toGender");
 
+/* gender icon */
+function icon(g){
+if(g==="male") return "👦";
+if(g==="female") return "👧";
+return "❤️";
+}
+
+/* title text */
 document.getElementById("title").innerText=
 `Hey ${to}, will you be my Valentine? ❤️`;
 
+/* YES click */
+document.getElementById("yes").onclick=()=>{
+document.getElementById("modal").style.display="flex";
 document.getElementById("final").innerText=
-`${from} & ${to} are now Valentines 💖`;
+`${icon(fg)} ${from} & ${icon(tg)} ${to} are now Valentines 💖`;
+document.getElementById("bgMusic").play();
+};
 
-// no button
+/* NO button move */
 const no=document.getElementById("no");
 function move(){
 no.style.left=Math.random()*(innerWidth-120)+"px";
@@ -142,21 +169,18 @@ no.style.top=Math.random()*(innerHeight-120)+"px";
 no.ontouchstart=e=>{e.preventDefault();move();}
 no.onclick=move;
 
-// yes
-document.getElementById("yes").onclick=()=>{
-document.getElementById("modal").style.display="flex";
-};
-
-// hearts
+/* hearts + flowers rain */
 setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerText="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=3+Math.random()*3+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},300);
+let el=document.createElement("div");
+el.className="fall";
+el.innerText=Math.random()>0.5?"❤️":"🌸";
+el.style.left=Math.random()*100+"vw";
+el.style.fontSize=18+Math.random()*20+"px";
+el.style.animationDuration=2+Math.random()*4+"s";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),7000);
+},200);
+
 </script>
 
 </body>
