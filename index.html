@@ -15,90 +15,104 @@ overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
-}
-
-.container{
+flex-direction:column;
 text-align:center;
 color:white;
-width:100%;
-padding:20px;
-position:relative;
 }
 
+/* Title */
 h1{
 font-size:2rem;
-margin-bottom:40px;
+margin-bottom:20px;
 }
 
-/* Buttons layout */
+/* Buttons container */
 .buttons{
 position:relative;
+width:90%;
+max-width:400px;
 height:200px;
 }
 
-/* YES Button */
+/* YES button */
 #yes{
-padding:15px 40px;
-font-size:20px;
+position:absolute;
+left:20%;
+top:50%;
+transform:translateY(-50%);
+padding:15px 35px;
+font-size:18px;
 border:none;
-border-radius:50px;
-background:linear-gradient(45deg,#00c853,#64dd17);
+border-radius:40px;
 color:white;
-font-weight:bold;
 cursor:pointer;
+background:linear-gradient(45deg,#00c853,#69f0ae);
 box-shadow:0 10px 25px rgba(0,0,0,0.3);
+transition:all .3s ease;
 animation:breath 2s infinite;
-transition:0.3s;
 }
 
 /* breathing animation */
 @keyframes breath{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
+0%{transform:translateY(-50%) scale(1);}
+50%{transform:translateY(-50%) scale(1.08);}
+100%{transform:translateY(-50%) scale(1);}
 }
 
-/* NO Button */
+/* NO button */
 #no{
 position:absolute;
+right:20%;
+top:50%;
+transform:translateY(-50%);
 padding:15px 35px;
 font-size:18px;
 border:none;
-border-radius:50px;
-background:linear-gradient(45deg,#ff1744,#ff616f);
+border-radius:40px;
 color:white;
-font-weight:bold;
 cursor:pointer;
-box-shadow:0 8px 20px rgba(0,0,0,0.3);
-transition:0.3s;
+background:linear-gradient(45deg,#ff1744,#ff616f);
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+transition:.3s;
 }
 
-/* message */
+/* message area */
 #message{
 margin-top:20px;
 font-size:18px;
-font-weight:bold;
 min-height:30px;
 }
 
-/* falling hearts */
-.fall{
+/* modal */
+.modal{
 position:fixed;
-top:-10px;
-animation:drop linear infinite;
-pointer-events:none;
+inset:0;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:5;
 }
 
-@keyframes drop{
-to{transform:translateY(110vh);opacity:0;}
+.box{
+background:white;
+padding:30px;
+border-radius:20px;
+color:#e6005c;
+text-align:center;
+animation:pop .5s ease;
+}
+
+@keyframes pop{
+from{transform:scale(0);}
+to{transform:scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-<h1 id="title"></h1>
+<h1 id="title">Will you be my Valentine? ❤️</h1>
 
 <div class="buttons">
 <button id="yes">YES 💚</button>
@@ -107,88 +121,62 @@ to{transform:translateY(110vh);opacity:0;}
 
 <div id="message"></div>
 
+<div class="modal" id="modal">
+<div class="box">
+<h2>Yayyyy! 💖</h2>
+<p>Now we are officially Valentines 💍🌸</p>
+</div>
 </div>
 
-<audio id="bgMusic" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-
-/* URL parameters */
-const p=new URLSearchParams(location.search);
-const from=p.get("from")||"Someone";
-const to=p.get("to")||"You";
-
-document.getElementById("title").innerText=
-`Hey ${to}, will you be my Valentine? ❤️`;
 
 const yes=document.getElementById("yes");
 const no=document.getElementById("no");
 const msg=document.getElementById("message");
 
-let yesSize=1;
-let clickCount=0;
+let scale=1;
+let noClicks=0;
 
-/* Funny messages */
 const messages=[
 "Are you sure? 🥺",
-"Think again 😢",
-"Please don’t say no 💔",
-"I will cry 😭",
-"Last chance 😳",
-"Okay fine… I give up 😩",
-"You broke my heart 💔"
+"Think again… 💭",
+"Please reconsider ❤️",
+"Last chance 😭",
+"Still no? 😢",
+"You are breaking my heart 💔",
+"Okay fine… but really? 😩",
+"I’ll keep asking 😌"
 ];
 
-/* NO button move inside screen */
-function moveButton(){
-const maxX=window.innerWidth-no.offsetWidth-20;
-const maxY=window.innerHeight-no.offsetHeight-20;
-
-const x=Math.random()*maxX;
-const y=Math.random()*maxY;
-
-no.style.left=x+"px";
-no.style.top=y+"px";
-}
+/* YES click */
+yes.onclick=()=>{
+document.getElementById("modal").style.display="flex";
+};
 
 /* NO click */
-no.addEventListener("click",()=>{
+no.onclick=()=>{
 
-clickCount++;
+noClicks++;
 
-/* increase YES size */
-yesSize+=0.2;
-yes.style.transform=`scale(${yesSize})`;
+/* YES grows */
+scale+=0.15;
+yes.style.transform=`translateY(-50%) scale(${scale})`;
 
-/* change message */
-msg.innerText=messages[clickCount % messages.length];
+/* show message */
+msg.innerText=messages[(noClicks-1)%messages.length];
 
-/* move NO */
-moveButton();
-});
+/* move NO inside screen */
+const parent=document.querySelector(".buttons");
+const maxX=parent.clientWidth - no.offsetWidth;
+const maxY=parent.clientHeight - no.offsetHeight;
 
-/* YES click */
-yes.addEventListener("click",()=>{
-document.getElementById("bgMusic").play();
-msg.innerText=`💖 ${from} & ${to} are now Valentines 💖`;
-});
+const randomX=Math.random()*maxX;
+const randomY=Math.random()*maxY;
 
-/* hearts rain */
-setInterval(()=>{
-let el=document.createElement("div");
-el.className="fall";
-el.innerText=Math.random()>0.5?"❤️":"🌸";
-el.style.left=Math.random()*100+"vw";
-el.style.fontSize=18+Math.random()*20+"px";
-el.style.animationDuration=2+Math.random()*4+"s";
-document.body.appendChild(el);
-setTimeout(()=>el.remove(),7000);
-},200);
-
-/* initial NO position */
-moveButton();
+no.style.left=randomX+"px";
+no.style.top=randomY+"px";
+no.style.right="auto";
+};
 
 </script>
 
