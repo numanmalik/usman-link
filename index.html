@@ -148,7 +148,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
       </style></head>
 <body data-new-gr-c-s-check-loaded="14.1272.0" data-gr-ext-installed="" monica-id="ofpnmcalabcbjgholdjcjblkibolbppb" monica-version="9.0.6">
 
-    <div class="card" id="">
+    <div class="card" id="main-card">
         <div id="game-ui">
             <h1 id="title">Musu!</h1>
             <div class="illustration-container">
@@ -211,7 +211,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
             mainCard.innerHTML = `
                 <div class="fade-in">
                     <h1>Success! ❤️</h1>
-                    <div class="illustration-container"><img src="image6.png"></div>
+                    <div class="illustration-container"><img src="images/image6.png"></div>
                     <div class="text-box">I have three special gifts for you. Pick one to open:</div>
                     <div class="btn-container">
                         <button class="gift-btn" onclick="openGiftPage(1)">🎁 Gift 1</button>
@@ -273,19 +273,32 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         }
 
         const btn = document.getElementById('runaway-btn');
+        if(btn){
+            btn.addEventListener('mouseenter', () => {
+                const maxX = window.innerWidth - btn.offsetWidth;
+                const maxY = window.innerHeight - btn.offsetHeight;
 
-        btn.addEventListener('mouseenter', () => {
-            // Calculate available space (window width/height minus button size)
-            const maxX = window.innerWidth - btn.offsetWidth;
-            const maxY = window.innerHeight - btn.offsetHeight;
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+
+                btn.style.left = randomX + 'px';
+                btn.style.top = randomY + 'px';
+            });
+        }
+
+
+        //btn.addEventListener('mouseenter', () => {
+            // //Calculate available space (window width/height minus button size)
+            //const maxX = window.innerWidth - btn.offsetWidth;
+            //const maxY = window.innerHeight - btn.offsetHeight;
 
             // Generate random coordinates
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+            //const randomX = Math.floor(Math.random() * maxX);
+           // const randomY = Math.floor(Math.random() * maxY);
 
-            // Apply new position
-            btn.style.left = randomX + 'px';
-            btn.style.top = randomY + 'px';
-        });
+           // // Apply new position
+           // btn.style.left = randomX + 'px';
+            //btn.style.top = randomY + 'px';
+        //});
     </script>
 
