@@ -66,12 +66,18 @@ button {
   background:#ff4d6d;
   color:white;
 }
+h1 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--accent-pink);
+    font-size: 2.5rem;
+    margin: 0 0 15px 0;
+}
 </style>
 </head>
 <body>
 
 <div class="card" id="screen1">
-  <h2>Musu ❤️</h2>
+  <h1>Musu ❤️</h1>
   <p>Ready for a sweet challenge?</p>
   <button class="yes" onclick="next(2)">Yes</button>
   <button class="no" onclick="noMsg(1)">No</button>
@@ -79,7 +85,7 @@ button {
 </div>
 
 <div class="card" id="screen2">
-  <h2>Love Question</h2>
+  <h1>Love Question</h1>
   <p>Are you the sweetest girl in the world?</p>
   <button class="yes" onclick="next(3)">Yes</button>
   <button class="no" onclick="noMsg(2)">No</button>
@@ -87,7 +93,7 @@ button {
 </div>
 
 <div class="card" id="screen3">
-  <h2>Love Question</h2>
+  <h1>Love Question</h1>
   <p>Do you think we make a perfect pair?</p>
   <button class="yes" onclick="next(4)">Yes</button>
   <button class="no" onclick="noMsg(3)">No</button>
@@ -95,7 +101,7 @@ button {
 </div>
 
 <div class="card" id="screen4">
-  <h2>Love Question</h2>
+  <h1>Love Question</h1>
   <p>Do I make you feel loved every day?</p>
   <button class="yes" onclick="next(5)">Yes</button>
   <button class="no" onclick="noMsg(4)">No</button>
@@ -103,7 +109,7 @@ button {
 </div>
 
 <div class="card" id="screen5">
-  <h2>Love Question</h2>
+  <h1>Love Question</h1>
   <p>Will you be my Valentine forever?</p>
   <button class="yes" onclick="next(6)">Yes</button>
   <button class="no" onclick="noMsg(5)">No</button>
@@ -111,7 +117,7 @@ button {
 </div>
 
 <div class="card" id="screen6">
-  <h2>Success! ❤️</h2>
+  <h1>Success! ❤️</h1>
   <p>I have 3 special gifts for you</p>
   <button class="gift-btn" onclick="next(7)">🎁 Gift 1</button>
   <button class="gift-btn" onclick="next(8)">🎁 Gift 2</button>
@@ -119,19 +125,19 @@ button {
 </div>
 
 <div class="card" id="screen7">
-  <h2>Our Memories</h2>
+  <h1>Our Memories</h1>
   <p>Every picture is my favorite with you ❤️</p>
   <button onclick="next(6)">Back to Gifts</button>
 </div>
 
 <div class="card" id="screen8">
-  <h2>A Letter For You</h2>
+  <h1>A Letter For You</h1>
   <p>You are the best thing in my life ❤️</p>
   <button onclick="next(6)">Back to Gifts</button>
 </div>
 
 <div class="card" id="screen9">
-  <h2>My Promise</h2>
+  <h1>My Promise</h1>
   <p>I promise to always be there for you 💖</p>
   <button onclick="next(6)">Back to Gifts</button>
 </div>
