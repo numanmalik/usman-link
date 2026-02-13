@@ -113,17 +113,47 @@ h1 {
 </style>
 </head>
 <body>
+  
 
-<div class="card" id="screen1">
+
+
+
+  <div class="card" id="screen1">
+        <div id="game-ui">
+            <h1 id="title">Musu!</h1>
+            <div class="illustration-container">
+                <img id="main-img" src="image1.jpg" alt="Start Image">
+            </div>
+            <div class="text-box" id="q-box">ready for a sweet Valentine's challenge?</div>
+            <div class="btn-container" style="flex-direction: row; justify-content: center; gap: 15px;" id="action-btns">
+                <button class="yes-btn" onclick="next(2)">Yes!</button>
+                <button class="no-btn" onclick="noMsg(1)">No</button>
+                <!-- <button class="no-btn" id="runaway-btn">No</button> -->
+            </div>
+            <div id="error-msg" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;"></div>
+            <!-- <div id="error-msg" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;">musu, answer nai milena ! ❤️</div>
+            <div id="error-msg1" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;">musu, answer nai milena ! ❤️</div> -->
+        </div>
+    </div>
+
+
+
+
+
+
+
+<!-- <div class="card" id="screen1">
   <h1>Musu ❤️</h1>
   <div class="illustration-container">
       <img id="main-img" src="images/image1.jpg" alt="Start Image">
   </div>
   <p>Ready for a sweet challenge?</p>
-  <button class="yes" onclick="next(2)">Yes</button>
-  <button class="no" onclick="noMsg(1)">No</button>
+  <div>
+    <button class="yes" onclick="next(2)">Yes</button>
+    <button class="no" onclick="noMsg(1)">No</button>
+  </div>
   <div class="small-msg" id="msg1"></div>
-</div>
+</div> -->
 
 <div class="card" id="screen2">
   <h1>Love Question</h1>
