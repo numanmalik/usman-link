@@ -3,181 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine ❤️</title>
+<title>For My Queen ❤️</title>
 
 <style>
-body{
-margin:0;
-height:100vh;
-background:linear-gradient(135deg,#ff4e8d,#ff9a9e);
-font-family:Arial,sans-serif;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
-color:white;
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  background: linear-gradient(-45deg, #ffd1dc, #ffe6f0, #ffcce0, #fff0f5);
+  background-size: 400% 400%;
+  animation: bg 8s ease infinite;
 }
 
-/* Title */
-h1{
-font-size:2rem;
-margin-bottom:20px;
+@keyframes bg {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
 
-/* Buttons container */
-.buttons{
-position:relative;
-width:90%;
-max-width:400px;
-height:200px;
+.card {
+  background:white;
+  width:320px;
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  display:none;
+  animation: fade 0.5s ease;
 }
 
-/* YES button */
-#yes{
-position:absolute;
-left:20%;
-top:50%;
-transform:translateY(-50%);
-padding:15px 35px;
-font-size:18px;
-border:none;
-border-radius:40px;
-color:white;
-cursor:pointer;
-background:linear-gradient(45deg,#00c853,#69f0ae);
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-transition:all .3s ease;
-animation:breath 2s infinite;
+@keyframes fade {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
 }
 
-/* breathing animation */
-@keyframes breath{
-0%{transform:translateY(-50%) scale(1);}
-50%{transform:translateY(-50%) scale(1.08);}
-100%{transform:translateY(-50%) scale(1);}
+button {
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-/* NO button */
-#no{
-position:absolute;
-right:20%;
-top:50%;
-transform:translateY(-50%);
-padding:15px 35px;
-font-size:18px;
-border:none;
-border-radius:40px;
-color:white;
-cursor:pointer;
-background:linear-gradient(45deg,#ff1744,#ff616f);
-box-shadow:0 8px 20px rgba(0,0,0,0.25);
-transition:.3s;
+.yes { background:#ff4d6d; color:white; }
+.no { background:#ddd; }
+
+.small-msg {
+  font-size:12px;
+  color:red;
+  margin-top:10px;
 }
 
-/* message area */
-#message{
-margin-top:20px;
-font-size:18px;
-min-height:30px;
-}
-
-/* modal */
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.6);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:5;
-}
-
-.box{
-background:white;
-padding:30px;
-border-radius:20px;
-color:#e6005c;
-text-align:center;
-animation:pop .5s ease;
-}
-
-@keyframes pop{
-from{transform:scale(0);}
-to{transform:scale(1);}
+.gift-btn {
+  display:block;
+  width:100%;
+  margin:10px 0;
+  background:#ff4d6d;
+  color:white;
 }
 </style>
 </head>
-
 <body>
 
-<h1 id="title">Will you be my Valentine? ❤️</h1>
-
-<div class="buttons">
-<button id="yes">YES 💚</button>
-<button id="no">NO 💔</button>
+<div class="card" id="screen1">
+  <h2>Musu ❤️</h2>
+  <p>Ready for a sweet challenge?</p>
+  <button class="yes" onclick="next(2)">Yes</button>
+  <button class="no" onclick="noMsg(1)">No</button>
+  <div class="small-msg" id="msg1"></div>
 </div>
 
-<div id="message"></div>
-
-<div class="modal" id="modal">
-<div class="box">
-<h2>Yayyyy! 💖</h2>
-<p>Now we are officially Valentines 💍🌸</p>
+<div class="card" id="screen2">
+  <h2>Love Question</h2>
+  <p>Are you the sweetest girl in the world?</p>
+  <button class="yes" onclick="next(3)">Yes</button>
+  <button class="no" onclick="noMsg(2)">No</button>
+  <div class="small-msg" id="msg2"></div>
 </div>
+
+<div class="card" id="screen3">
+  <h2>Love Question</h2>
+  <p>Do you think we make a perfect pair?</p>
+  <button class="yes" onclick="next(4)">Yes</button>
+  <button class="no" onclick="noMsg(3)">No</button>
+  <div class="small-msg" id="msg3"></div>
+</div>
+
+<div class="card" id="screen4">
+  <h2>Love Question</h2>
+  <p>Do I make you feel loved every day?</p>
+  <button class="yes" onclick="next(5)">Yes</button>
+  <button class="no" onclick="noMsg(4)">No</button>
+  <div class="small-msg" id="msg4"></div>
+</div>
+
+<div class="card" id="screen5">
+  <h2>Love Question</h2>
+  <p>Will you be my Valentine forever?</p>
+  <button class="yes" onclick="next(6)">Yes</button>
+  <button class="no" onclick="noMsg(5)">No</button>
+  <div class="small-msg" id="msg5"></div>
+</div>
+
+<div class="card" id="screen6">
+  <h2>Success! ❤️</h2>
+  <p>I have 3 special gifts for you</p>
+  <button class="gift-btn" onclick="next(7)">🎁 Gift 1</button>
+  <button class="gift-btn" onclick="next(8)">🎁 Gift 2</button>
+  <button class="gift-btn" onclick="next(9)">🎁 Gift 3</button>
+</div>
+
+<div class="card" id="screen7">
+  <h2>Our Memories</h2>
+  <p>Every picture is my favorite with you ❤️</p>
+  <button onclick="next(6)">Back to Gifts</button>
+</div>
+
+<div class="card" id="screen8">
+  <h2>A Letter For You</h2>
+  <p>You are the best thing in my life ❤️</p>
+  <button onclick="next(6)">Back to Gifts</button>
+</div>
+
+<div class="card" id="screen9">
+  <h2>My Promise</h2>
+  <p>I promise to always be there for you 💖</p>
+  <button onclick="next(6)">Back to Gifts</button>
 </div>
 
 <script>
+function next(screen) {
+  document.querySelectorAll(".card").forEach(c => c.style.display="none");
+  document.getElementById("screen"+screen).style.display="block";
+}
 
-const yes=document.getElementById("yes");
-const no=document.getElementById("no");
-const msg=document.getElementById("message");
+function noMsg(screen) {
+  document.getElementById("msg"+screen).innerText = "No is not allowed 😜";
+}
 
-let scale=1;
-let noClicks=0;
-
-const messages=[
-"Are you sure? 🥺",
-"Think again… 💭",
-"Please reconsider ❤️",
-"Last chance 😭",
-"Still no? 😢",
-"You are breaking my heart 💔",
-"Okay fine… but really? 😩",
-"I’ll keep asking 😌"
-];
-
-/* YES click */
-yes.onclick=()=>{
-document.getElementById("modal").style.display="flex";
-};
-
-/* NO click */
-no.onclick=()=>{
-
-noClicks++;
-
-/* YES grows */
-scale+=0.15;
-yes.style.transform=`translateY(-50%) scale(${scale})`;
-
-/* show message */
-msg.innerText=messages[(noClicks-1)%messages.length];
-
-/* move NO inside screen */
-const parent=document.querySelector(".buttons");
-const maxX=parent.clientWidth - no.offsetWidth;
-const maxY=parent.clientHeight - no.offsetHeight;
-
-const randomX=Math.random()*maxX;
-const randomY=Math.random()*maxY;
-
-no.style.left=randomX+"px";
-no.style.top=randomY+"px";
-no.style.right="auto";
-};
-
+next(1);
 </script>
 
 </body>
