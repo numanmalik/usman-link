@@ -135,6 +135,27 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
             transform: scale(1.1);
             z-index: 1;
         }
+        .fade-delay-1 {
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .fade-delay-2 {
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
     </style>
 <style id="monica-reading-highlight-style">
         .monica-reading-highlight {
@@ -150,19 +171,19 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 
     <div class="card" id="main-card">
         <div id="game-ui">
-            <h1 id="title">Musu!</h1>
+            <h1 id="title">Saima!</h1>
             <div class="illustration-container">
                 <img id="main-img" src="images/image1.jpg" alt="Start Image">
             </div>
-            <div class="text-box" id="q-box">ready for a sweet Valentine's challenge?</div>
+            <div class="text-box" id="q-box">Are you ready for your 5th Anniversary surprise, my love? ❤️</div>
             <div class="btn-container" style="flex-direction: row; justify-content: center; gap: 15px;" id="action-btns">
                 <button class="yes-btn" onclick="nextQuestion()">Yes!</button>
                 <button class="no-btn" onclick="showError()">No</button>
                 <!-- <button class="no-btn" id="runaway-btn">No</button> -->
             </div>
             <div id="error-msg" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;"></div>
-            <!-- <div id="error-msg" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;">musu, answer nai milena ! ❤️</div>
-            <div id="error-msg1" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;">musu, answer nai milena ! ❤️</div> -->
+            <!-- <div id="error-msg" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;">Saima, answer nai milena ! ❤️</div>
+            <div id="error-msg1" style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 15px; opacity: 0; font-weight: 600;">Saima, answer nai milena ! ❤️</div> -->
         </div>
     </div>
 
@@ -180,11 +201,31 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         setInterval(createHeart, 400);
 
         const content = [
-            { q: "ready for small Valentines' challenge?", img: "images/image1.png", error: "no, vanna mildaina k musu 🥹🥹!!" },
-            { q: "are you the prettiest girl in the world?", img: "images/image2.png", error: "wrong answer musu, you definitely are ❤️❤️." },
-            { q: "do you think we make a perfect pair?", img: "images/image3.png", error: "'no' not found in here 😅😅" },
-            { q: "musu, do I make you feel loved every day?", img: "images/image4.png", error: "i will try ajhai dherai hai tw musu 😟😟! (aile chai yes nai vandeu na)" },
-            { q: "will you be my Valentine forever?", img: "images/image5.png", error: "access denied, you are stuck with me hai! 😂😂"}
+            { 
+                q: "Are you ready for a small anniversary surprise?", 
+                img: "images/image1.png", 
+                error: "No isn’t allowed, Saima 🥰❤️!!" 
+            },
+            { 
+                q: "Are you still the most beautiful woman in my world?", 
+                img: "images/image2.png", 
+                error: "Wrong answer, Saima. You will always be my most beautiful ❤️❤️." 
+            },
+            { 
+                q: "Do you believe we were truly meant for each other?", 
+                img: "images/image3.png", 
+                error: "'No' doesn’t exist in our love story 😅❤️" 
+            },
+            { 
+                q: "Saima, do I make you feel loved and valued every day?", 
+                img: "images/image4.png", 
+                error: "I promise to try even harder, my love 😟❤️ (But for now… just say yes.)" 
+            },
+            { 
+                q: "Will you continue this beautiful journey with me forever?", 
+                img: "images/image5.png", 
+                error: "Access denied — you’re lovingly stuck with me forever 😂❤️" 
+            }
         ];
 
         let currentIdx = 0;
@@ -207,20 +248,46 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
             }
         }
 
+        // function showGiftMenu() {
+        //     mainCard.innerHTML = `
+        //         <div class="fade-in">
+        //             <h1>Success! ❤️</h1>
+        //             <div class="illustration-container"><img src="images/image6.png"></div>
+        //             <div class="text-box">I have three special gifts for you. Pick one to open:</div>
+        //             <div class="btn-container">
+        //                 <button class="gift-btn" onclick="openGiftPage(1)">🎁 Gift 1</button>
+        //                 <button class="gift-btn" onclick="openGiftPage(2)">✉️ Gift 2</button>
+        //                 <button class="gift-btn" onclick="openGiftPage(3)">📜 Gift 3</button>
+        //             </div>
+        //         </div>
+        //     `;
+        // }
         function showGiftMenu() {
             mainCard.innerHTML = `
-                <div class="fade-in">
-                    <h1>Success! ❤️</h1>
-                    <div class="illustration-container"><img src="images/image6.png"></div>
-                    <div class="text-box">I have three special gifts for you. Pick one to open:</div>
-                    <div class="btn-container">
-                        <button class="gift-btn" onclick="openGiftPage(1)">🎁 Gift 1</button>
-                        <button class="gift-btn" onclick="openGiftPage(2)">✉️ Gift 2</button>
-                        <button class="gift-btn" onclick="openGiftPage(3)">📜 Gift 3</button>
+                <div>
+                    <h1 class="fade-delay-1">Happy 5th Anniversary, My Forever ❤️</h1>
+
+                    <div class="fade-delay-2">
+                        <h1>You Did It, My Love 💕</h1>
+                        <div class="illustration-container">
+                            <img src="images/image6.png" alt="Anniversary Surprise">
+                        </div>
+                        <div class="text-box">
+                            As a reward for passing my little love challenge, 
+                            I have prepared three special anniversary gifts just for you. 
+                            Each one holds a piece of my heart. 
+                            Choose one to open, my forever. 💍✨
+                        </div>
+                        <div class="btn-container">
+                            <button class="gift-btn" onclick="openGiftPage(1)">🎁 A Sweet Surprise</button>
+                            <button class="gift-btn" onclick="openGiftPage(2)">✉️ A Love Letter</button>
+                            <button class="gift-btn" onclick="openGiftPage(3)">📜 A Special Promise</button>
+                        </div>
                     </div>
                 </div>
             `;
         }
+
 
         function openGiftPage(giftNum) {
             let giftHTML = "";
@@ -231,16 +298,19 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
                         <h1>Our Memories</h1>
                         
                         <div class="memory-grid">
-                            <img src="ma rw tmi 1.jpeg" alt="Memory 1">
-                            <img src="ma rw tmi 2.jpeg" alt="Memory 2">
-                            <img src="ma rw tmi 3.jpeg" alt="Memory 3">
-                            <img src="ma rw tmi 4.jpeg" alt="Memory 4">
-                            <img src="ma rw tmi 5.jpeg" alt="Memory 5">
-                            <img src="ma rw tmi 6.jpeg" alt="Memory 6">
+                            <img src="images/ma rw tmi 1.jpeg" alt="Memory 1">
+                            <img src="images/ma rw tmi 2.jpeg" alt="Memory 2">
+                            <img src="images/ma rw tmi 3.jpeg" alt="Memory 3">
+                            <img src="images/ma rw tmi 4.jpeg" alt="Memory 4">
+                            <img src="images/ma rw tmi 5.jpeg" alt="Memory 5">
+                            <img src="images/ma rw tmi 6.jpeg" alt="Memory 6">
                         </div>
 
                         <div class="text-box">
-                            every picture of us is my favorite, and this small collection is just a small reminder of how beautiful our journey has been so far ❣️💚❣️.
+                            Every picture of us holds a story, a laugh, a lesson, and a moment of love. 
+                            This small collection is just a glimpse of the countless beautiful memories we have created together. 
+                            Looking back at them reminds me how far we’ve come, how much we’ve grown, and how blessed I am to share this journey with you. 
+                            And this is only the beginning of forever. ❣️💚❣️
                         </div>
                     </div>`;
             } else if (giftNum === 2) {
@@ -248,8 +318,11 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
                     <div class="fade-in">
                         <h1>A Letter For You</h1>
                         <div class="text-box" style="text-align: left; background: #fffafa; padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-pink);">
-                            my angry bird,<br><br>
-                            i just wanted to tell you that you are the best thing that has ever happened to me, and with you it feels like I am complete, living with you, spending time with you made me realize more and more that why god has chosen you for me, thank you for being with me ❣️❣️❣️. 
+                            My love,<br><br>
+                            On this beautiful anniversary, I just want to say that marrying you was the best decision of my life. 
+                            With you, I feel complete. Every day spent with you makes me more grateful that God chose you to be my partner. 
+                            Thank you for your love, your patience, your strength, and your beautiful heart. 
+                            I am truly blessed to walk this journey with you. ❣️❣️❣️
                         </div>
                     </div>`;
             } else if (giftNum === 3) {
@@ -257,7 +330,9 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
                     <div class="fade-in">
                         <h1>My Promise</h1>
                         <div class="text-box" style="text-align: left; background: #fffafa; padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-pink);">
-                            i promise that I will always be there for you, and I won't ever let you down on anything, be it small or big I will always be standing firm with you 🫰🫰
+                            On this special anniversary, I promise again that I will always stand by your side. 
+                            Through every small moment and every big challenge, I will be there for you. 
+                            I will protect our love, respect you, support you, and cherish you for the rest of my life. 🥰❤️
                         </div>
                     </div>`;
             }
